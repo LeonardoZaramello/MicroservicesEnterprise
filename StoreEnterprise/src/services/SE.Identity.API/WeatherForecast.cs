@@ -1,4 +1,4 @@
-namespace SE.Identidade.API
+namespace SE.Identity.API
 {
     public class WeatherForecast
     {

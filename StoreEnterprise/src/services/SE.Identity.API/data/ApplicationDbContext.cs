@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SE.Identidade.API.Models;
 
-namespace SE.Identidade.API.data
+namespace SE.Identity.API.data
 {
-    public class ApplicationDbContext : IdentityDbContext<UserRegister>
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
