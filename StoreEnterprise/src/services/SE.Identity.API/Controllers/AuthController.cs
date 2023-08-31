@@ -10,9 +10,9 @@ using SE.Identity.API.Models;
 
 namespace SE.Identity.API.Controllers
 {
-    [ApiController]
+
     [Route("api/identidade")]
-    public class AuthController : Controller
+    public class AuthController : MainController
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -28,6 +28,8 @@ namespace SE.Identity.API.Controllers
         [HttpPost("nova-conta")]
         public async Task<IActionResult> RegisterUser(UserRegister userRegister)
         {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
             var user = new IdentityUser
             {
                 UserName = userRegister.Email,
@@ -36,27 +38,40 @@ namespace SE.Identity.API.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, userRegister.Password!);
+
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, false);
-                return Ok(await GenerateCustomJwt(userRegister.Email));
+                return CustomResponse(await GenerateCustomJwt(userRegister.Email));
             }
 
-            return NotFound();
+            foreach (var error in result.Errors)
+            {
+                AddError(error.Description);
+            }
+
+            return CustomResponse();
         }
 
 
         [HttpPost("autenticar")]
         public async Task<IActionResult> Login(UserLogin userLogin)
         {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
             var result = await _signInManager.PasswordSignInAsync(userLogin.Email!, userLogin.Password!, false, true);
 
             if (result.Succeeded)
             {
-                return Ok(await GenerateCustomJwt(userLogin.Email));
+                return CustomResponse(await GenerateCustomJwt(userLogin.Email));
+            }
+            if (result.IsLockedOut)
+            {
+                AddError("Usuário temporariamente bloqueado por tentativas inválidas");
+                return CustomResponse();
             }
 
-            return BadRequest();
+            AddError("Usuário ou senha incorretos");
+            return CustomResponse();
         }
 
         [NonAction]
