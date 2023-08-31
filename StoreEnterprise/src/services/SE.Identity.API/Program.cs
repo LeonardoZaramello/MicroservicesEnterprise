@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SE.Identity.API;
 using SE.Identity.API.data;
 using SE.Identity.API.Extensions;
 
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 //IDENTITY CONFIG
 builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
+    .AddErrorDescriber<IdentityPtBrMessages>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
