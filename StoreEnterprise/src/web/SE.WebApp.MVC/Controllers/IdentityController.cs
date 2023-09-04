@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace SE.WebApp.MVC.Controllers
 {
-    public class IdentityController : Controller
+    public class IdentityController : MainController
     {
         private readonly IAuthService _authService;
 
@@ -32,6 +32,8 @@ namespace SE.WebApp.MVC.Controllers
 
             var response = await _authService.Register(userRegister);
 
+            if(ResponseContainErrors(response.ResponseResult)) return View(userRegister);
+
             await PerformLogin(response);
 
             return RedirectToAction("Index", "Home");
@@ -52,6 +54,8 @@ namespace SE.WebApp.MVC.Controllers
 
             var response = await _authService.Login(userLogin);
 
+            if (ResponseContainErrors(response.ResponseResult)) return View(userLogin);
+
             await PerformLogin(response);
 
             return RedirectToAction("Index", "Home");
@@ -61,6 +65,8 @@ namespace SE.WebApp.MVC.Controllers
         [Route("/logout")]
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -88,9 +94,5 @@ namespace SE.WebApp.MVC.Controllers
             );
         }
 
-        //private static JwtSecurityToken GetFormatedToken(string jwtToken)
-        //{
-        //    return new JwtSecurityTokenHandler().ReadToken(jwtToken) as JwtSecurityToken;
-        //}
     }
 }

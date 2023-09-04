@@ -31,14 +31,15 @@ namespace SE.WebApp.MVC.Models
     {
         public string AcessToken { get; set; }
         public double ExpiresIn { get; set; }
-        public UserToken userToken { get; set; }
+        public UserToken UserToken { get; set; }
+        public ResponseResult ResponseResult { get; set; } 
     }
 
     public class UserToken
     {
         public string Id { get; set; }
         public string Email { get; set; }
-        public IEnumerable<UserClaims> userClaims { get; set; }
+        public IEnumerable<UserClaims> UserClaims { get; set; }
     }
 
     public class UserClaims

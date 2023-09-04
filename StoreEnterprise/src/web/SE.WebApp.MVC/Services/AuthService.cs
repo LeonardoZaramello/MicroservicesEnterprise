@@ -4,14 +4,12 @@ using System.Text.Json;
 
 namespace SE.WebApp.MVC.Services
 {
-    public class AuthService : IAuthService
+    public class AuthService : Service, IAuthService
     {
-        //private readonly IHttpClientFactory _httpClientFactory;
         private readonly HttpClient _httpClient;
 
-        public AuthService(/*IHttpClientFactory httpClientFactory*/ HttpClient httpClient)
+        public AuthService(HttpClient httpClient)
         {
-            //_httpClientFactory = httpClientFactory;
             _httpClient = httpClient;
         }
 
@@ -26,6 +24,14 @@ namespace SE.WebApp.MVC.Services
                 PropertyNameCaseInsensitive = true,
             };
 
+            if(!HandleErrorsResponse(response)) 
+            {
+                return new UserResponseLogin
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), serializeOptions)!
+                };
+            }
+
             return JsonSerializer.Deserialize<UserResponseLogin>(await response.Content.ReadAsStringAsync(), serializeOptions)!;
         }
 
@@ -35,7 +41,20 @@ namespace SE.WebApp.MVC.Services
 
             var response = await _httpClient.PostAsync("http://localhost:5035/api/identidade/nova-conta", registerContent);
 
-            return JsonSerializer.Deserialize<UserResponseLogin>(await response.Content.ReadAsStringAsync())!;
+            var serializeOptions = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            if (!HandleErrorsResponse(response))
+            {
+                return new UserResponseLogin
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), serializeOptions)!
+                };
+            }
+
+            return JsonSerializer.Deserialize<UserResponseLogin>(await response.Content.ReadAsStringAsync(), serializeOptions)!;
         }
     }
 }
