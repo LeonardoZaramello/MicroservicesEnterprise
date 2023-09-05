@@ -28,6 +28,8 @@ namespace SE.Identity.API.Controllers
         [HttpPost("nova-conta")]
         public async Task<IActionResult> RegisterUser(UserRegister userRegister)
         {
+            //return new StatusCodeResult(403);
+
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var user = new IdentityUser
