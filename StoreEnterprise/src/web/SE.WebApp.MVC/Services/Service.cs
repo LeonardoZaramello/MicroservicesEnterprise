@@ -6,15 +6,12 @@ namespace SE.WebApp.MVC.Services
 {
     public abstract class Service
     {
-        protected StringContent GetContent(object data)
+        protected StringContent GetContent(object obj)
         {
-            return new StringContent(
-                JsonSerializer.Serialize(data),
-                Encoding.UTF8,
-                "application/json");
+            return new StringContent(JsonSerializer.Serialize(obj), Encoding.UTF8, "application/json");
         }
 
-        protected async Task<T> DeserializarObjetoResponse<T>(HttpResponseMessage responseMessage)
+        protected async Task<T> DeserializarResponseObject<T>(HttpResponseMessage responseMessage)
         {
             var options = new JsonSerializerOptions
             {
