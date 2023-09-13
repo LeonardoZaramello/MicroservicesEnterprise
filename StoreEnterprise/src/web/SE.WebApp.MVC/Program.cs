@@ -4,6 +4,20 @@ using SE.WebApp.MVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//APP SETTINGS
+var appSettingsSection = builder.Configuration.GetSection("AppSettings");
+builder.Services.Configure<AppSettings>(appSettingsSection);
+
+//ENVIROMENT CONFIG
+builder.Configuration.SetBasePath(builder.Environment.ContentRootPath);
+builder.Configuration.AddJsonFile("appsettings.json", true, true);
+builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true);
+builder.Configuration.AddEnvironmentVariables();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<StartupBase>();
+}
+
 // Add services to the container.
 // IDENTITY CONFIG
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
