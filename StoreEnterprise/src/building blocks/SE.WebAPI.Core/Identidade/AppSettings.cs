@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SE.Identity.API.Extensions
+namespace SE.WebAPI.Core.Identidade
 {
     public class AppSettings
     {
