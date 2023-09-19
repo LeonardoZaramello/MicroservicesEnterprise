@@ -8,7 +8,7 @@ namespace SE.Catalogo.API.Data
     {
         public CatalogoContext(DbContextOptions<CatalogoContext> options) : base(options) { }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

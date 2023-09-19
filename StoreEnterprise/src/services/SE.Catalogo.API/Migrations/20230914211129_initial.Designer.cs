@@ -12,8 +12,8 @@ using SE.Catalogo.API.Data;
 namespace SE.Catalogo.API.Migrations
 {
     [DbContext(typeof(CatalogoContext))]
-    [Migration("20230913174903_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230914211129_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,39 +25,39 @@ namespace SE.Catalogo.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SE.Catalogo.API.Models.Product", b =>
+            modelBuilder.Entity("SE.Catalogo.API.Models.Produto", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
+                    b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("DateRegister")
+                    b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("varchar(500)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("Imagem")
                         .IsRequired()
                         .HasColumnType("varchar(250)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(250)");
 
-                    b.Property<int>("StockQuantity")
+                    b.Property<int>("QuantidadeEstoque")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Value")
+                    b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Produtos", (string)null);
                 });
 #pragma warning restore 612, 618
         }

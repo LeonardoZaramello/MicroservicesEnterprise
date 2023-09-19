@@ -4,25 +4,25 @@ using SE.Catalogo.API.Models;
 
 namespace SE.Catalogo.API.Data.Mappings
 {
-    public class ProductMapping : IEntityTypeConfiguration<Product>
+    public class ProdutoMapping : IEntityTypeConfiguration<Produto>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<Produto> builder)
         {
             builder.HasKey(c => c.Id);
 
-            builder.Property(c => c.Name)
+            builder.Property(c => c.Nome)
                 .IsRequired()
                 .HasColumnType("varchar(250)");
 
-            builder.Property(c => c.Description)
+            builder.Property(c => c.Descricao)
                 .IsRequired()
                 .HasColumnType("varchar(500)");
 
-            builder.Property(c => c.Image)
+            builder.Property(c => c.Imagem)
                 .IsRequired()
                 .HasColumnType("varchar(250)");
 
-            builder.ToTable("Products");
+            builder.ToTable("Produtos");
         }
     }
 }
