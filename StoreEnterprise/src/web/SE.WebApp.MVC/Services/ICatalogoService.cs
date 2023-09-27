@@ -9,12 +9,12 @@ namespace SE.WebApp.MVC.Services
         Task<ProdutoViewModel> ObterPorId(Guid id);
     }
 
-    //public interface ICatalogoServiceRefit
-    //{
-    //    [Get("/catalogo/produtos/")]
-    //    Task<IEnumerable<ProdutoViewModel>> ObterTodos();
+    public interface ICatalogoServiceRefit
+    {
+        [Get("/catalogo/produtos/")]
+        Task<IEnumerable<ProdutoViewModel>> ObterTodos();
 
-    //    [Get("/catalogo/produtos/{id}")]
-    //    Task<ProdutoViewModel> ObterPorId(Guid id);
-    //}
+        [Get("/catalogo/produtos/{id}")]
+        Task<ProdutoViewModel> ObterPorId(Guid id);
+    }
 }
