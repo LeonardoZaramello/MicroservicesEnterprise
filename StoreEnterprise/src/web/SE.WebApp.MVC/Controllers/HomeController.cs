@@ -4,17 +4,19 @@ using System.Diagnostics;
 
 namespace SE.WebApp.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : MainController
     {
-
-        public IActionResult Index()
+        [Route("sistema-indisponivel")]
+        public IActionResult SistemaIndisponivel()
         {
-            return View();
-        }
+            var modelErro = new ErrorViewModel
+            {
+                Message = "O sistema está temporariamente indisponível, isto pode ocorrer em momentos de sobrecarga de usuários.",
+                Title = "Sistema indisponível.",
+                ErrorCode = 500
+            };
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View("Error", modelErro);
         }
 
         [Route("error/{id:length(3,3)}")]
@@ -48,11 +50,5 @@ namespace SE.WebApp.MVC.Controllers
 
             return View("Error", modelErro);
         }
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
     }
 }

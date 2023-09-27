@@ -36,11 +36,11 @@ namespace SE.WebApp.MVC.Controllers
 
             await PerformLogin(response);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Catalogo");
         }
 
         [HttpGet]
-        [Route("/login")]
+        [Route("login")]
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -48,7 +48,7 @@ namespace SE.WebApp.MVC.Controllers
         }
 
         [HttpPost]
-        [Route("/login")]
+        [Route("login")]
         public async Task<IActionResult> Login(UserLogin userLogin, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -60,7 +60,7 @@ namespace SE.WebApp.MVC.Controllers
 
             await PerformLogin(response);
 
-            if(string.IsNullOrWhiteSpace(returnUrl)) RedirectToAction("Index", "Home");
+            if(string.IsNullOrEmpty(returnUrl)) return RedirectToAction("Index", "Catalogo");
 
             return LocalRedirect(returnUrl);
         }
@@ -71,7 +71,7 @@ namespace SE.WebApp.MVC.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Catalogo");
         }
 
         [NonAction]

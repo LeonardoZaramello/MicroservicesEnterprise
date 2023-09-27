@@ -12,6 +12,7 @@ namespace SE.WebApp.MVC.Extensions
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
+        
         {
             try
             {

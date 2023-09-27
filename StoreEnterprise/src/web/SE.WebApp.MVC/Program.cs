@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SE.WebApp.MVC.Extensions;
 using SE.WebApp.MVC.Services;
+using SE.WebApp.MVC.Services.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//APP SETTINGS
-var appSettingsSection = builder.Configuration.GetSection("AppSettings");
-builder.Services.Configure<AppSettings>(appSettingsSection);
 
 //ENVIROMENT CONFIG
 builder.Configuration.SetBasePath(builder.Environment.ContentRootPath);
@@ -18,6 +16,20 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddUserSecrets<StartupBase>();
 }
 
+// DEPENDENCY INJECTION
+builder.Services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+builder.Services.AddHttpClient<IAuthService, AuthService>();
+
+builder.Services.AddHttpClient<ICatalogoService, CatalogoService>()
+    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IUser, AspNetUser>();
+
+//APP SETTINGS
+var appSettingsSection = builder.Configuration.GetSection("AppSettings");
+builder.Services.Configure<AppSettings>(appSettingsSection);
+
 // Add services to the container.
 // IDENTITY CONFIG
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -27,10 +39,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/acess-denied";
     });
 
-// DEPENDENCY INJECTION
-builder.Services.AddHttpClient<IAuthService, AuthService>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped<IUser, AspNetUser>();
 
 builder.Services.AddControllersWithViews();
 
@@ -58,6 +66,6 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Catalogo}/{action=Index}/{id?}");
 
 app.Run();
