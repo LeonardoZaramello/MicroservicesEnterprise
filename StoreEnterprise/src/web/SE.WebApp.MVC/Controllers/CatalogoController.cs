@@ -6,10 +6,12 @@ namespace SE.WebApp.MVC.Controllers
 {
     public class CatalogoController : MainController
     {
-        private readonly ICatalogoServiceRefit _catalogoService;
+        //private readonly ICatalogoServiceRefit _catalogoServiceRefit;
+        private readonly ICatalogoService _catalogoService;
 
-        public CatalogoController(ICatalogoServiceRefit catalogoService)
+        public CatalogoController(/*ICatalogoServiceRefit catalogoServiceRefit*/ ICatalogoService catalogoService)
         {
+            //_catalogoServiceRefit = catalogoServiceRefit;
             _catalogoService = catalogoService;
         }
 

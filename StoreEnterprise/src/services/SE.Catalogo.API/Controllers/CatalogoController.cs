@@ -27,6 +27,8 @@ namespace SE.Catalogo.API.Controllers
         [HttpGet("catalogo/produtos/{id}")]
         public async Task<Produto> GetProductById(Guid id)
         {
+            throw new Exception("Erro!");
+
             return await _productRepository.GetById(id);
         }
     }
