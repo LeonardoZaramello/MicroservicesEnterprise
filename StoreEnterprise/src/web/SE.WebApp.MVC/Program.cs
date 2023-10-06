@@ -26,8 +26,10 @@ builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddHttpClient<ICatalogoService, CatalogoService>()
     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
     //.AddTransientHttpErrorPolicy( policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
-    .AddPolicyHandler(PollyUtils.RetryPolicy());
+    .AddPolicyHandler(PollyUtils.RetryPolicy())
+    .AddTransientHttpErrorPolicy( policy => policy.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
+#region Refit
 //builder.Services.AddHttpClient("Refit",
 //        options =>
 //    {
@@ -35,6 +37,7 @@ builder.Services.AddHttpClient<ICatalogoService, CatalogoService>()
 //    })
 //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
 //    .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
+#endregion
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IUser, AspNetUser>();
