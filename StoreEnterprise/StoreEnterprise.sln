@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalogo", "catalogo", "{7B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Catalogo.API", "src\services\SE.Catalogo.API\SE.Catalogo.API.csproj", "{72332D59-CECB-4C41-8B8E-1F76AE2D1481}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Cliente.API", "src\services\SE.Cliente.API\SE.Cliente.API.csproj", "{E6BAB7D4-0EF7-4881-B6D1-F819564702F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Clientes.API", "src\services\SE.Cliente.API\SE.Clientes.API.csproj", "{E6BAB7D4-0EF7-4881-B6D1-F819564702F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Pagamento.API", "src\services\SE.Pagamento.API\SE.Pagamento.API.csproj", "{9814F94F-C403-4D03-B70A-916A21A6BC6A}"
 EndProject
@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.WebApp.MVC", "src\web\SE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E0956181-A172-4F09-BC4D-D632FD258A8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.WebAPI.Core", "src\building blocks\SE.WebAPI.Core\SE.WebAPI.Core.csproj", "{7612B7FB-5AF9-48FD-A156-D6CCD79CFC54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.WebAPI.Core", "src\building blocks\SE.WebAPI.Core\SE.WebAPI.Core.csproj", "{7612B7FB-5AF9-48FD-A156-D6CCD79CFC54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
