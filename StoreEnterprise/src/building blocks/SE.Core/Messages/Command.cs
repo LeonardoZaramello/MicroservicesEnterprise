@@ -18,7 +18,7 @@ namespace SE.Core.Messages
             Timestamp = DateTime.Now;
         }
 
-        public virtual bool EhValido()
+        public virtual bool IsValid()
         {
             throw new NotImplementedException();
         }

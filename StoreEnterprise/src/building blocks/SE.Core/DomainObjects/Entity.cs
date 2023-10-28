@@ -44,7 +44,7 @@ namespace SE.Core.DomainObjects
             var compareTo = obj as Entity;
 
             if (ReferenceEquals(this, compareTo)) return true;
-            if (ReferenceEquals(null, compareTo)) return false;
+            if (compareTo is null) return false;
 
             return Id.Equals(compareTo.Id);
         }

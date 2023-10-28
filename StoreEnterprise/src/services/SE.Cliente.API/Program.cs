@@ -1,10 +1,14 @@
+using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SE.Clientes.API.Application.Commands;
 using SE.Clientes.API.Data;
+using SE.Clientes.API.Data.Repository;
+using SE.Clientes.API.Models;
 using SE.Core.Mediator;
 using SE.WebAPI.Core.Identidade;
 using System.Reflection;
@@ -18,9 +22,9 @@ builder.Services.AddControllers();
 
 //DEPENDENCY INJECTION
 builder.Services.AddScoped<IMediatorHandler, MediatorHandler>();
-//builder.Services.AddScoped<IRequestHandler<RegistrarClienteCommand, ValidationResult>, ClienteCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<RegistrarClienteCommand, ValidationResult>, ClienteCommandHandler>();
 //builder.Services.AddScoped<INotificationHandler<ClienteRegistradoEvent>, ClienteEventHandler>();
-//builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<ClientesContext>();
 
 //ENVIROMENT CONFIG

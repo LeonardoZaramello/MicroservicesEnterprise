@@ -28,7 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+	  <Folder Include="Controllers\" />
+	  <Folder Include="Application\Queries\" />
   </ItemGroup>
 
 </Project>
